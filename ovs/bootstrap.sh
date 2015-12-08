@@ -14,3 +14,5 @@ echo `pwd`
 sh boot.sh
 sh configure
 make install
+
+echo 'export PATH=$PATH:/usr/local/bin' >> /root/.profile

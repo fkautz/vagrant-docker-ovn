@@ -8,10 +8,10 @@ systemctl start docker.service
 systemctl enable docker.service
 usermod -a -G docker vagrant
 
-#git clone https://github.com/openvswitch/ovs.git
-#cd ovs
-#echo `pwd`
-#sh boot.sh
-#sh configure
-#make
+git clone https://github.com/openvswitch/ovs.git
+cd ovs
+echo `pwd`
+sh boot.sh
+sh configure
+make
 

@@ -13,5 +13,4 @@ cd ovs
 echo `pwd`
 sh boot.sh
 sh configure
-make
-
+make install

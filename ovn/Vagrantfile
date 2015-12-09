@@ -3,4 +3,12 @@
 Vagrant.configure(2) do |config|
   config.vm.box = "ovs"
   config.vm.synced_folder "src/", "/docker-ovn"
+  config.vm.define "host1" do |host|
+    host.vm.network "private_network", ip: "192.168.10.2"
+    host.vm.provision :shell, path: "src/ovn1.sh"
+  end
+  config.vm.define "host2" do |host|
+    host.vm.network "private_network", ip: "192.168.10.3"
+    host.vm.provision :shell, path: "src/ovn2.sh"
+  end
 end

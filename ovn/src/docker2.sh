@@ -24,6 +24,7 @@ echo "$CONTAINER2_NAME: $CONTAINER2_MAC_ADDR $CONTAINER2_IP4_ADDR $CONTAINER2_CI
 # set up flow for container 1
 sudo nsenter --target $CONTAINER1_PID --net ip link del eth0
 sudo ip link add vethe1 type veth peer name vethi1
+sudo ip link set dev vethi1 address $CONTAINER1_MAC_ADDR
 sudo ip link set vethi1 netns $CONTAINER1_PID
 sudo nsenter --target $CONTAINER1_PID --net ip link set dev vethi1 name eth0
 sudo nsenter --target $CONTAINER1_PID --net ip link set dev eth0 mtu 1450
@@ -39,6 +40,7 @@ sudo ip link set vethe1 up
 # set up flow for container 2
 sudo nsenter --target $CONTAINER2_PID --net ip link del eth0
 sudo ip link add vethe2 type veth peer name vethi2
+sudo ip link set dev vethi2 address $CONTAINER2_MAC_ADDR
 sudo ip link set vethi2 netns $CONTAINER2_PID
 sudo nsenter --target $CONTAINER2_PID --net ip link set dev vethi2 name eth0
 sudo nsenter --target $CONTAINER2_PID --net ip link set dev eth0 mtu 1450
@@ -51,8 +53,10 @@ sudo /usr/local/bin/ovs-vsctl add-port br-int vethe2 -- set Interface vethe2 ext
 sudo nsenter --target $CONTAINER2_PID --net ip link set dev eth0 up
 sudo ip link set dev vethe2 up
 
-# debug
-#/usr/local/bin/ovn-nbctl show
-#/usr/local/bin/ovs-ofctl dump-flows br-int
-#/usr/local/bin/ovs-ofctl show br-int
-#docker exec -it $CONTAINER1_NAME /bin/sh
+#debug
+#sudo /usr/local/bin/ovn-nbctl show
+#sudo /usr/local/bin/ovs-ofctl dump-flows br-int
+#sudo /usr/local/bin/ovs-ofctl show br-int
+#sudo /usr/local/bin/ovs-ofctl -O OpenFlow13 dump-flows br-int
+#sudo docker exec -it $CONTAINER1_NAME /bin/sh
+#watch -d -n 0.5 '/usr/local/bin/ovs-ofctl -O OpenFlow13 dump-flows br-int | cut -f3- -d","'

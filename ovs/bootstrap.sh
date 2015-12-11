@@ -1,6 +1,6 @@
 #!/bin/sh
 
-dnf -y install git autoconf automake libtool docker
+dnf -y install git autoconf automake libtool docker sshpass
 dnf groupinstall -y "Development Tools"
 
 chkconfig docker on

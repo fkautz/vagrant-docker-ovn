@@ -2,6 +2,8 @@
 
 dnf -y install git autoconf automake libtool docker sshpass
 dnf groupinstall -y "Development Tools"
+# ovs compilation requires module 'six' to be installed
+easy_install six
 
 chkconfig docker on
 systemctl start docker.service

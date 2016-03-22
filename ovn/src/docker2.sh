@@ -35,7 +35,7 @@ sudo nsenter --target $CONTAINER1_PID --net ip link set dev vethi1 name eth0
 sudo nsenter --target $CONTAINER1_PID --net ip link set dev eth0 mtu 1450
 sudo nsenter --target $CONTAINER1_PID --net ip addr add $CONTAINER1_IP4_ADDR/$CONTAINER1_CIDR_ADDR dev eth0
 sshpass -p vagrant ssh -o StrictHostKeyChecking=no 192.168.10.2 sudo /usr/local/bin/ovn-nbctl lport-add sw0 $CONTAINER1_NAME
-sshpass -p vagrant ssh -o StrictHostKeyChecking=no 192.168.10.2 sudo /usr/local/bin/ovn-nbctl lport-set-addresses $CONTAINER1_NAME "$CONTAINER1_MAC_ADDR $CONTAINER1_IP4_ADDR"
+sshpass -p vagrant ssh -o StrictHostKeyChecking=no 192.168.10.2 sudo /usr/local/bin/ovn-nbctl lport-set-addresses $CONTAINER1_NAME \"$CONTAINER1_MAC_ADDR $CONTAINER1_IP4_ADDR\"
 #sudo /usr/local/bin/ovs-vsctl add-port br-int vethe1 -- set Interface vethe1 external_ids:attached-mac=$CONTAINER1_MAC_ADDR external_ids:iface-id=$CONTAINER1_ID external_ids:ip_address=$CONTAINER1_IP4_ADDR
 #sudo /usr/local/bin/ovs-vsctl add-port br-int vethe1
 sudo /usr/local/bin/ovs-vsctl add-port br-int vethe1 -- set Interface vethe1 external_ids:iface-id=$CONTAINER1_NAME
@@ -51,7 +51,7 @@ sudo nsenter --target $CONTAINER2_PID --net ip link set dev vethi2 name eth0
 sudo nsenter --target $CONTAINER2_PID --net ip link set dev eth0 mtu 1450
 sudo nsenter --target $CONTAINER2_PID --net ip addr add $CONTAINER2_IP4_ADDR/$CONTAINER2_CIDR_ADDR dev eth0
 sshpass -p vagrant ssh -o StrictHostKeyChecking=no 192.168.10.2 sudo /usr/local/bin/ovn-nbctl lport-add sw0 $CONTAINER2_NAME
-sshpass -p vagrant ssh -o StrictHostKeyChecking=no 192.168.10.2 sudo /usr/local/bin/ovn-nbctl lport-set-addresses $CONTAINER2_NAME "$CONTAINER2_MAC_ADDR $CONTAINER2_IP4_ADDR"
+sshpass -p vagrant ssh -o StrictHostKeyChecking=no 192.168.10.2 sudo /usr/local/bin/ovn-nbctl lport-set-addresses $CONTAINER2_NAME \"$CONTAINER2_MAC_ADDR $CONTAINER2_IP4_ADDR\"
 #sudo /usr/local/bin/ovs-vsctl add-port br-int vethe2 -- set interface vethe2 external_ids:attached-mac=$CONTAINER2_MAC_ADDR external_ids:iface-id=$CONTAINER2_ID external_ids:ip_address=$CONTAINER2_IP4_ADDR
 #sudo /usr/local/bin/ovs-vsctl add-port br-int vethe2
 sudo /usr/local/bin/ovs-vsctl add-port br-int vethe2 -- set Interface vethe2 external_ids:iface-id=$CONTAINER2_NAME
